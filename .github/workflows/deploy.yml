@@ -1,33 +1,30 @@
-name: Deploy
+name: Deploy static site
 
 on:
   push:
     branches:
       - main
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
-    env:
-      FB_PROJECT_ID: ${{ secrets.FB_PROJECT_ID }}
-      FB_CLIENT_EMAIL: ${{ secrets.FB_CLIENT_EMAIL }}
-      FB_PRIVATE_KEY: ${{ secrets.FB_PRIVATE_KEY }}
-      FB_DB_URL: ${{ secrets.FB_DB_URL }}
-      BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-      ADMIN_IDS: ${{ secrets.ADMIN_IDS }}
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Node
-        uses: actions/setup-node@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          node-version: 20
+          path: .
 
-      - name: Install packages
-        run: npm install
-
-      - name: Build
-        run: npm run build
+      - name: Deploy
+        uses: actions/deploy-pages@v4
