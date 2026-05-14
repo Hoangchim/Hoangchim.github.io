@@ -5,4 +5,7 @@
     "firebase-admin": "^13.0.0"
   
   }
+  "scripts": {
+  "build": "echo Build done"
+}
 }
