@@ -17,7 +17,13 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     runs-on: ubuntu-latest
-
+ env:
+      FB_PROJECT_ID: ${{ secrets.FB_PROJECT_ID }}
+      FB_CLIENT_EMAIL: ${{ secrets.FB_CLIENT_EMAIL }}
+      FB_PRIVATE_KEY: ${{ secrets.FB_PRIVATE_KEY }}
+      FB_DB_URL: ${{ secrets.FB_DB_URL }}
+      BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+      ADMIN_IDS: ${{ secrets.ADMIN_IDS }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
